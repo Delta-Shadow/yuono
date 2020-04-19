@@ -1,0 +1,39 @@
+<html>
+	<head>
+		<link rel="stylesheet" type="text/css" href="css.css">
+                <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+		<!--script src = "/socket.io/socket.io.js"></script-->
+		<!--script defer type="text/javascript" src="js.js"></script-->
+		<script defer type="text/javascript" src="screens.js"></script>
+	</head>
+	<body> 
+
+            <div id='menu-cont' class='container'></div>
+            <div id='creating-room-cont' class='container'></div>
+            <div id='joining-room-cont' class='container'></div>
+            <div id='game-room-cont' class='container'>
+                <div id='game-room' class='screen'>
+                    <div id='players-list'>
+                        <div id='player'>
+                            <p id='name'>DS</p>
+                            <div id='avatar'></div>
+                            <p id='avatar-txt'>D</p>
+                            <p id='card-count'>7</p>
+                        </div>
+                    </div>
+                    <div id='discard-pile'>
+                        <img src='res/3g.png' class='c1'>
+                        <!--img src='res/7y.png' class='c2'>
+                        <img src='res/bs.png' class='c3'>
+                        <img src='res/bd.png' class='c4'-->
+                    </div>
+                    <div id='draw-pile'>
+                        <img src='res/back.png'>
+                    </div>
+                    <div id='cards-list'>
+                    </div>
+                </div>
+            </div>
+
+	</body>
+</html>

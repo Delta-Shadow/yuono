@@ -1,0 +1,329 @@
+/*
+	yellow: rgb(255, 223, 64);
+	red: rgb(255, 64, 64);
+	green: rgb(54, 204, 51);
+	blue: rgb(64, 127, 255);
+	black: rgb(26, 26, 26);
+	white: rgb(230, 230, 230);
+*/
+
+* {
+	padding: 0; margin: 0;
+        font-family: "Montserrat", sans-serif;
+        text-align: center;
+}
+
+button:active, button:focus {
+	border: none;
+	outline: none;
+}
+
+button {
+	background-color: rgb(26, 26, 26); 
+	font-size: 2em;
+	color: rgb(230, 230, 230);
+	border-radius: 1em;
+	border: none;  
+	outline: none;
+}
+
+html, body {
+	width: 100%;
+	height: 100%;
+        overflow: hidden;
+}
+
+.container {
+        position: absolute;
+	width: 100%; 
+	height: 100%;
+}
+
+.screen {
+        position: absolute;
+	width: 100%; 
+	height: 100%;
+	display: grid;
+	grid-template-columns: repeat(9, 1fr);
+	grid-template-rows: repeat(16, 1fr);
+	background-color: rgb(230, 230, 230);
+}
+
+#menu-deck, .menu-cards {
+	visibility: visible;
+	position: relative;
+	grid-column: 4 / span 3;
+	grid-row: 4 / span 4;
+	/*width: 100%;
+	height: 100%;*/
+	align-self: center;
+	justify-self: center;
+	animation: deck-drop 1.5s ease-out, deck-float 2s ease-in-out 1.5s infinite; 
+}
+
+#menu-deck {
+	transform: scale(1.2);
+}
+
+@keyframes deck-drop {
+	from {top: -200%;}
+	to {top: 7%;} 
+}
+
+@keyframes deck-float {
+	0% {top: 7%;}
+	50% {top: -7%;}
+	100% {top: 7%;}
+}
+
+#c1 {
+	animation: cards-hide 1.5s, c1-peek 5s ease-in-out 1.5s infinite;
+}
+
+#c2 {
+	animation: cards-hide 1.5s, c2-peek 5s ease-in-out 1.5s infinite;
+}
+
+#c3 {
+	animation: cards-hide 1.5s, c3-peek 5s ease-in-out 1.5s infinite;
+}
+
+#c4 {
+	animation: cards-hide 1.5s, c4-peek 5s ease-in-out 1.5s infinite;
+}
+
+@keyframes cards-hide {
+	from {visibility: hidden;}
+	to {visibility: hidden;}
+}
+
+@keyframes c1-peek {
+	0% { left: 0px; top: 0px; transform: rotate(0deg); }
+	20% { left: 200px; top: 30px; transform: rotate(20deg); }
+	50% { left: 200px; top: 30px; transform: rotate(20deg); }
+	70% { left: 0px; top: 0px; transform: rotate(0deg); }
+	100% { left: 0px; top: 0px; transform: rotate(0deg); }
+}
+
+@keyframes c2-peek {
+	0% { left: 0px; transform: rotate(0deg); }
+	20% { left: 100px; transform: rotate(10deg); }
+	50% { left: 100px; transform: rotate(10deg); }
+	70% { left: 0px; transform: rotate(0deg); }
+	100% { left: 0px; transform: rotate(0deg); }
+}
+
+@keyframes c3-peek {
+	0% { left: 0px; transform: rotate(0deg); }
+	20% { left: -100px; transform: rotate(-10deg); }
+	50% { left: -100px; transform: rotate(-10deg); }
+	70% { left: 0px; transform: rotate(0deg); }
+	100% { left: 0px; transform: rotate(0deg); }
+}
+
+@keyframes c4-peek {
+	0% { left: 0px; top: 0px; transform: rotate(0deg); }
+	20% { left: -200px; top: 30px; transform: rotate(-20deg); }
+	50% { left: -200px; top: 30px; transform: rotate(-20deg); }
+	70% { left: 0px; top: 0px; transform: rotate(0deg); }
+	100% { left: 0px; top: 0px; transform: rotate(0deg); }
+}
+
+#menu-txtbox {
+	grid-column: 3 / span 5;
+	grid-row: 10;
+	width: 100%;
+	height: 100%; 
+	background-color: transparent;
+	border: none;
+	border-bottom: 3px solid rgb(26, 26, 26); 
+	outline: none;
+	font-size: 4em;
+	text-align: center;
+	animation: fadeIn 0.5s forwards;
+}
+
+#menu button {
+	grid-row: 12 / span 2;
+	width: 100%;
+	height: 50%;
+	align-self: center;
+	animation: fadeIn 1s 0s forwards;
+}
+
+#menu-createRoom-butt {
+	grid-column: 3 / span 2;
+}
+
+#menu-joinRoom-butt {
+	grid-column: 6 / span 2;
+} 
+
+
+/*----------------------------------- CREATING AND JOINING GAME SCREEN (common stuff) ----------------------------*/
+ 
+.screen.application {
+    position: relative;
+    background-color: rgb(255, 223, 64);
+    animation: screen-slideIn 1s ease-out;
+}
+
+@keyframes screen-slideIn {
+    from {bottom: -200%;}
+    to {bottom: 0%;}
+}
+
+.application * {
+    opacity: 0;
+    animation: fadeIn 0.5s linear 0.5s forwards;
+}
+
+.application #txt {
+    grid-area: 6 / 3 / span 1 / span 5;
+    width: 100%; height: 100%;
+    color: rgb(26, 26, 26);
+    text-align: center;
+    font-size: 3em;
+    font-weight: 300;
+}
+
+.application #code-txt {
+    grid-area: 8 / 3 / span 2 / span 5;
+    align-self: center;
+    animation-delay: 0.8s;
+    color: rgb(255, 64, 64);
+    text-align: center;
+    font-size: 4em;
+    font-weight: 600;
+}
+
+.application #ok {
+    grid-area: 11 / 4 / span 1 / span 3;
+    font-size: 3em;
+    animation-delay: 1.1s;
+    font-weight: 400;
+}
+
+/*----------------------------------- JOINING ROOM SCREEN -------------------------------------------*/
+
+#joining-game #code-txt {
+    height: 75%;
+}
+
+/*---------------------------------------- GAME ROOM ------------------------------------------------*/
+
+#game-room #discard-pile {
+    position: relative;
+    grid-area: 7 / 5 / span 3 / span 2;
+    width: 100%; height: 100%;
+}
+
+#discard-pile img {
+    position: absolute;
+    width: 100%; height: 100%;
+    transition: all 0.5s;
+}
+
+#discard-pile .c1 {
+    left: 0px;
+    z-index: 4;
+    animation: card-intro 1s ease-out; }
+
+#discard-pile .c2 {
+    left: 100px;
+    z-index: 3;
+}
+
+#discard-pile .c3 {
+    left: 200px;
+    z-index: 2;
+}
+
+#discard-pile .c4 {
+    left: 0px;
+    transform: scale(0);
+    z-index: 1;
+}
+
+#draw-pile {
+    position: relative;
+    grid-area: 7 / 2 / span 3 / span 2;
+    width: 100%; height: 100%;
+    animation: card-intro 1s ease-out;
+}
+
+@keyframes card-intro {
+    from {
+        opacity: 0;
+        top: -70%;
+    }
+    to {
+        opacity: 1;
+        top: 0%;
+    }
+}
+
+@keyframes back-card-slide {
+    from {left: -200%;}
+    to {left: 0%;}
+}
+
+#players-list {
+    grid-area: 1 / 1 / span 3 / span 9;
+    width: 100%; height: 100%;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: hidden auto;
+}
+
+#player {
+    position: relative;
+    flex: 0 0 auto;
+    width: calc(2 * 100% / 9); height: 100%;
+    display: grid;
+    grid-template: 1fr 2.5fr 1fr 1fr / 1fr;
+}
+
+#player #name {
+    grid-row: 1 / span 1;
+    font-size: 2em;
+    font-weight: 300;
+    width: 100%;
+    text-align: center;
+    align-self: center;
+}
+
+#player #avatar {
+    width: 75%; height: 100%; 
+    grid-row: 2 / span 1;
+    background-color: white;
+    font-size: 4em;
+    border-radius: 50%;
+    justify-self: center;
+}
+
+#player #avatar-txt {
+    position: absolute;
+    width: 100%;
+    grid-row: 2 / span 1;
+    font-size: 4em;
+    font-weight: 400;
+    align-self: center;
+    text-align: center;
+}
+
+#player #card-count {
+    grid-row: 3 / span 1;
+    background-color: red;
+    border-radius: 360em;
+    justify-self: center;
+    align-self: center;
+    font-size: 2em;
+}
+
+/*----------------------------------- GLOBAL ANIMATIONS ---------------------------------------------*/
+
+@keyframes fadeIn {
+	from {opacity: 0;}
+	to {opacity: 1;}
+}
