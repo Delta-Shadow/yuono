@@ -1,0 +1,105 @@
+/*
+    yellow: rgb(255, 223, 64);
+    red: rgb(255, 64, 64);
+    green: rgb(54, 204, 51);
+    blue: rgb(64, 127, 255);
+    black: rgb(26, 26, 26);
+    white: rgb(230, 230, 230);
+*/
+
+#menu .deck, #menu .card {
+    position: relative;
+    grid-column: 4 / span 3;
+    grid-row: 4 / span 4;
+    width: calc(2 * (100% / 3));
+    height: calc(3 * (100% / 4));
+    align-self: center;
+    justify-self: center;
+    opacity: 1;
+}
+
+#menu .deck {
+    transform: scale(1.2);
+    animation: deck-drop 1.5s ease-out, deck-float 2s ease-in-out 1.5s infinite; 
+}
+
+@keyframes deck-drop {
+    from {top: -200%;}
+    to {top: 7%;} 
+}
+
+@keyframes deck-float {
+    0% {top: 7%;}
+    50% {top: -7%;}
+    100% {top: 7%;}
+}
+
+#menu .c1 {
+    animation: cards-hide 1.5s, c1-peek 5s ease-in-out 1.5s infinite;
+}
+
+#menu .c2 {
+    animation: cards-hide 1.5s, c2-peek 5s ease-in-out 1.5s infinite;
+}
+
+#menu .c3 {
+    animation: cards-hide 1.5s, c3-peek 5s ease-in-out 1.5s infinite;
+}
+
+#menu .c4 {
+    animation: cards-hide 1.5s, c4-peek 5s ease-in-out 1.5s infinite;
+}
+
+@keyframes cards-hide {
+    from {opacity: 0;}
+    to {opacity: 0;}
+}
+
+@keyframes c1-peek {
+    0% { left: 0px; top: 0px; transform: rotate(0deg); }
+    20% { left: 70%; top: 10%; transform: rotate(20deg); }
+    50% { left: 70%; top: 10%; transform: rotate(20deg); }
+    70% { left: 0px; top: 0px; transform: rotate(0deg); }
+    100% { left: 0px; top: 0px; transform: rotate(0deg); }
+}
+
+@keyframes c2-peek {
+    0% { left: 0px; transform: rotate(0deg); }
+    20% { left: 35%; transform: rotate(10deg); }
+    50% { left: 35%; transform: rotate(10deg); }
+    70% { left: 0px; transform: rotate(0deg); }
+    100% { left: 0px; transform: rotate(0deg); }
+}
+
+@keyframes c3-peek {
+    0% { left: 0px; transform: rotate(0deg); }
+    20% { left: -35%; transform: rotate(-10deg); }
+    50% { left: -35%; transform: rotate(-10deg); }
+    70% { left: 0px; transform: rotate(0deg); }
+    100% { left: 0px; transform: rotate(0deg); }
+}
+
+@keyframes c4-peek {
+    0% { left: 0px; top: 0px; transform: rotate(0deg); }
+    20% { left: -70%; top: 10%; transform: rotate(-20deg); }
+    50% { left: -70%; top: 10%; transform: rotate(-20deg); }
+    70% { left: 0px; top: 0px; transform: rotate(0deg); }
+    100% { left: 0px; top: 0px; transform: rotate(0deg); }
+}
+
+#menu .txtbox {
+    grid-column: 3 / span 5;
+    grid-row: 9 / span 2;
+    width: 100%;
+    height: 50%; 
+    align-self: center;
+    animation: fadeIn 1s forwards;
+}
+
+#menu button {
+    grid-row: 12;
+    grid-column: 4 / span 3;
+    width: 100%;
+    height: 100%;
+    animation: fadeIn 1s 0s forwards;
+}

@@ -178,7 +178,7 @@ html, body {
     animation: fadeIn 0.5s linear 0.5s forwards;
 }
 
-.application #txt {
+.application .txt {
     grid-area: 6 / 3 / span 1 / span 5;
     width: 100%; height: 100%;
     color: rgb(26, 26, 26);
@@ -187,7 +187,7 @@ html, body {
     font-weight: 300;
 }
 
-.application #code-txt {
+.application .code-txt {
     grid-area: 8 / 3 / span 2 / span 5;
     align-self: center;
     animation-delay: 0.8s;
@@ -197,20 +197,48 @@ html, body {
     font-weight: 600;
 }
 
-.application #ok {
-    grid-area: 11 / 4 / span 1 / span 3;
+.application .ok {
+    grid-area: 11 / 3 / span 1 / span 2;
     font-size: 3em;
     animation-delay: 1.1s;
     font-weight: 400;
 }
 
-/*----------------------------------- JOINING ROOM SCREEN -------------------------------------------*/
+.application .back {
+    grid-area: 11 / 6 / span 1 / span 2;
+    font-size: 3em;
+    animation-delay: 1.4s;
+    font-weight: 400;
+}
+
+/*--------------------------------- JOINING ROOM SCREEN (Unique) ------------------------------------*/
 
 #joining-game #code-txt {
     height: 75%;
 }
 
+@keyframes fadeOut {
+    from {opacity: 1}
+    to {opacity: 0}
+}
+
+/*-------------------------------- CREATING ROOM SCREEN (Unique) ------------------------------------*/
+
+#creating-game .ok {
+    grid-area: 11 / 4 / span 1 / span 3;
+    animation: none;
+    transition: all 1s;
+}
+
 /*---------------------------------------- GAME ROOM ------------------------------------------------*/
+
+.screen#game-room {
+    position: relative;
+    background-color: rgb(230, 230, 230);
+    animation: screen-slideIn 1s ease-out;
+}
+
+/*-----------------------------------------------------------------------*/
 
 #game-room #discard-pile {
     position: relative;
@@ -227,7 +255,8 @@ html, body {
 #discard-pile .c1 {
     left: 0px;
     z-index: 4;
-    animation: card-intro 1s ease-out; }
+    animation: card-intro 1s ease-out;
+}
 
 #discard-pile .c2 {
     left: 100px;
@@ -249,31 +278,50 @@ html, body {
     position: relative;
     grid-area: 7 / 2 / span 3 / span 2;
     width: 100%; height: 100%;
-    animation: card-intro 1s ease-out;
+    animation: back-card-intro 1s ease-out 1s;
 }
 
+
 @keyframes card-intro {
-    from {
+    0% {
         opacity: 0;
         top: -70%;
+        transform: scale(0);
     }
-    to {
+    50% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    100% {
         opacity: 1;
         top: 0%;
     }
 }
 
-@keyframes back-card-slide {
-    from {left: -200%;}
-    to {left: 0%;}
+@keyframes back-card-intro {
+    0% {
+        opacity: 0;
+        top: 70%;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        top: 0%;
+    }
 }
+
+/*-----------------------------------------------------------------------*/
 
 #players-list {
     grid-area: 1 / 1 / span 3 / span 9;
     width: 100%; height: 100%;
     display: flex;
     flex-wrap: nowrap;
-    overflow: hidden auto;
+    overflow: auto hidden;
 }
 
 #player {
@@ -281,28 +329,30 @@ html, body {
     flex: 0 0 auto;
     width: calc(2 * 100% / 9); height: 100%;
     display: grid;
-    grid-template: 1fr 2.5fr 1fr 1fr / 1fr;
+    grid-template: 1fr 2.5fr 2fr / 1fr;
+    animation: fadeIn 1s;
 }
 
-#player #name {
+#player .name {
     grid-row: 1 / span 1;
     font-size: 2em;
-    font-weight: 300;
+    font-weight: 400;
     width: 100%;
     text-align: center;
     align-self: center;
 }
 
-#player #avatar {
-    width: 75%; height: 100%; 
+#player .avatar {
+    position: absolute;
+    width: 70%; height: 100%; 
     grid-row: 2 / span 1;
     background-color: white;
     font-size: 4em;
-    border-radius: 50%;
+    border-radius: 360em;
     justify-self: center;
 }
 
-#player #avatar-txt {
+#player .avatar-txt {
     position: absolute;
     width: 100%;
     grid-row: 2 / span 1;
@@ -312,13 +362,83 @@ html, body {
     text-align: center;
 }
 
-#player #card-count {
+#player .card-count {
     grid-row: 3 / span 1;
-    background-color: red;
-    border-radius: 360em;
+    width: 75%;
+    background-color: rgb(255, 64, 64);
+    border-radius: 0.5em;
     justify-self: center;
     align-self: center;
-    font-size: 2em;
+    font-size: 3em;
+    color: white;
+}
+
+/*-----------------------------------------------------------------------*/
+
+#cards-list {
+    position: absolute;
+    display: flex;
+    grid-area: 14 / 1 / span 3 / span 9;
+    width: 100%; height: 100%;
+    flex-wrap: nowrap;
+    overflow: auto hidden;
+}
+
+#cards-list img {
+    flex: 0 0 auto;
+    width: calc(2 * 100% / 9);
+    height: 100%;
+    margin: 1%;
+    animation: slideUp 1s;
+    position: relative;
+    transition: all 1s;
+}
+
+#cards-list .removing {
+    opacity: 0;
+    top: -50%;
+}
+
+#cards-list .removing ~ img {
+    left: calc((-1% - (2 * 100% / 9)));
+}
+
+/*---------------------------------------------------------------------------*/
+
+#game-room #txt {
+    opacity: 0;
+    grid-area: 6 / 2 / span 2 / span 7;
+    width: 100%;
+    color: rgb(26, 26, 26);
+    text-align: center;
+    align-self: center;
+    font-size: 3em;
+    font-weight: 300;
+    transition: all 0.5s;
+}
+
+#game-room #code-txt {
+    opacity: 0;
+    grid-area: 8 / 3 / span 2 / span 5;
+    align-self: center;
+    animation-delay: 0.8s;
+    color: rgb(255, 64, 64);
+    text-align: center;
+    font-size: 5em;
+    font-weight: 600;
+    padding: 0.5em;
+    border-radius: 1em;
+    border: black 3px solid;
+    transition: all 0.5s;
+}
+
+#game-room #start-game {
+    opacity: 0;
+    grid-area: 11 / 4 / span 1 / span 3;
+    font-size: 3em;
+    animation-delay: 1.1s;
+    font-weight: 400;
+    transition: all 0.5s;
 }
 
 /*----------------------------------- GLOBAL ANIMATIONS ---------------------------------------------*/
@@ -326,4 +446,9 @@ html, body {
 @keyframes fadeIn {
 	from {opacity: 0;}
 	to {opacity: 1;}
+}
+
+@keyframes slideUp {
+    from {bottom: -200%; opacity: 0;}
+    to {bottom: 0%; opacity: 1;}
 }

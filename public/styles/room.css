@@ -1,0 +1,293 @@
+/*
+    yellow: rgb(255, 223, 64);
+    red: rgb(255, 64, 64);
+    green: rgb(54, 204, 51);
+    blue: rgb(64, 127, 255);
+    black: rgb(26, 26, 26);
+    white: rgb(230, 230, 230);
+*/
+
+#room .players-list {
+    grid-area: 1 / 1 / span 3 / span 9;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow: auto hidden;
+}
+
+#room .players-list .player {
+    flex: 0 0 auto;
+    width: calc(2 * 100% / 9); height: 100%;
+    display: grid;
+    grid-template: repeat(6, 1fr) / 1fr;
+    animation: fadeIn 1s;
+}
+
+#room .players-list .player .name {
+    grid-row: 1 / span 1;
+    font-size: 1rem;
+    font-weight: 400;
+    width: 100%;
+    text-align: center;
+    align-self: center;
+}
+
+#room .players-list .player .avatar {
+    grid-row: 2 / span 4;
+    width: 100%; height: 100%; 
+    align-self: center;
+    justify-self: center;
+    position: relative;
+}
+
+#room .players-list .player .avatar img {
+    position: absolute;
+    width: 100%; height: 100%;
+    left: 0; top: 0;
+    transform: scale(0.9);
+} 
+
+#room .players-list .player .avatar .initials {
+    position: absolute;
+    width: 100%;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 2rem;
+    font-weight: 400;
+}
+
+#room .players-list .player .card-count {
+    grid-row: 6 / span 1;
+    width: 25%;
+    background-color: rgb(100, 0, 100);
+    border-radius: 5rem;
+    justify-self: center;
+    align-self: center;
+    font-size: 1rem;
+    color: white;
+}
+
+#room .draw-pile {
+    position: relative;
+    grid-area: 7 / 2 / span 3 / span 2;
+    width: 100%; height: 100%;
+}
+
+#room .discard-pile {
+    position: relative;
+    grid-area: 7 / 5 / span 3 / span 2;
+    width: 100%; height: 100%;
+}
+
+#room .discard-pile img {
+    position: absolute;
+    width: 100%; height: 100%;
+    transition: all 0.5s;
+    opacity: 0;
+    animation: card-insertion 1s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+#room .discard-pile .c1 {
+    left: 0px;
+    z-index: 4;
+    animation-delay: 0s;
+}
+
+#room .discard-pile .c2 {
+    left: calc(100% / 2);
+    z-index: 3;
+    animation-delay: 0.1s;
+}
+
+#room .discard-pile .c3 {
+    left: calc(100%);
+    z-index: 2;
+    animation-delay: 0.2s;
+}
+
+#room .discard-pile .c4 {
+    left: 0px;
+    transform: scale(0);
+    z-index: 1;
+    animation-delay: 0s;
+}
+
+#room .chat.butt {
+    grid-area: 12 / 4 / span 2 / span 3;
+    width: calc(100% / 3); height: calc(100% / 2);
+    align-self: center;
+    justify-self: center;
+    animation: fadeIn 1s ease-out;
+}
+
+#room .cards-list {
+    position: relative;
+    grid-area: 14 / 1 / span 3 / span 9;
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+}
+
+#room .cards-list img {
+    flex: 0 0 auto;
+    width: calc(2 * 100% / 9);
+    height: 100%;
+    position: relative;
+    transition: all 1s;
+}
+
+#room .cards-list img.card {
+    opacity: 0;
+    animation: card-insertion 1s;
+    animation-timing-function: ease-out;
+    animation-fill-mode: forwards;
+}
+
+#room .cards-list img.initial-card:nth-of-type(1) { animation-delay: 0.1s; }
+#room .cards-list img.initial-card:nth-of-type(2) { animation-delay: 0.2s; }
+#room .cards-list img.initial-card:nth-of-type(3) { animation-delay: 0.3s; }
+#room .cards-list img.initial-card:nth-of-type(4) { animation-delay: 0.4s; }
+#room .cards-list img.initial-card:nth-of-type(5) { animation-delay: 0.5s; }
+#room .cards-list img.initial-card:nth-of-type(6) { animation-delay: 0.6s; }
+#room .cards-list img.initial-card:nth-of-type(7) { animation-delay: 0.7s; }
+
+
+/*--------------------------------------------- CHATBOX (SOCIAL) ------------------------------------------------*/
+
+#room .chatbox {
+    grid-area: 4 / 1 / span 13 / span 9;
+    display: grid;
+    grid-template-rows: repeat(13, 1fr);
+    grid-template-columns: repeat(9, 1fr);
+    background-color: rgb(230, 230, 230);
+    z-index: 100;
+    transition: opacity 0.5s;
+}
+
+#room .chatbox.show {
+    opacity: 1;
+}
+
+#room .chatbox.hide {
+    opacity: 0;
+}
+
+#room .chatbox .txtbox {
+    grid-area: 12 / 1 / span 2 / span 7;
+    background-color: white;
+    border: none;
+    height: 50%;
+    align-self: center;
+    border-radius: 1rem;
+}
+
+#room .chatbox .butt {
+    font-size: 1rem;
+    color: rgb(255, 64, 64);
+    background-color: rgb(200, 200, 200);
+    width: 75%; height: 50%;
+    align-self: center;
+    justify-self: end;
+    opacity: 0;
+    animation-name: fadeIn;
+    animation-duration: 0.5s;
+    animation-fill-mode: forwards;
+}
+
+#room .chatbox .send.butt {
+    grid-area: 12 / 8 / span 2 / span 2;
+    animation-delay: 0s;
+}
+
+#room .chatbox .back.butt {
+    grid-area: 10 / 8 / span 2 / span 2;
+    animation-delay: 0.2s;
+}
+
+#room .chatbox .quit.butt {
+    grid-area: 8 / 8 / span 2 / span 2;
+    animation-delay: 0.4s;
+}
+
+#room .chatbox .kick.butt {
+    grid-area: 6 / 8 / span 2 / span 2;
+    animation-delay: 0.6s;
+}
+
+#room .chatbox .start.butt {
+    grid-area: 4 / 8 / span 2 / span 2;
+    animation-delay: 0.8s;
+}
+
+#room .chatbox .room-code {
+    grid-area: 1 / 1 / span 2 / span 5;
+    background-color: purple;
+    color: white;
+    font-size: 1rem;
+    border-radius: 1rem;
+    width: 80%;
+    align-self: center;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+#room .chatbox .messages {
+    grid-area: 3 / 1 / span 9 / span 7;
+    display: flex;
+    flex-flow: column nowrap;
+    justify-content: flex-end;
+    align-items: flex-start;
+}
+
+#room .chatbox .messages .message {
+    max-width: 70%;
+    margin: 0 0 1rem 1rem;
+    padding: 1rem;
+    background-color: rgb(200, 200, 200);
+    border-radius: 1rem;
+}
+
+#room .chatbox .messages .message .sender {
+    font-size: 0.5rem;
+    color: red;
+}
+
+#room .chatbox .messages .message .txt {
+    font-size: 0.7rem;
+    color: rgb(26, 26, 26);
+}
+
+/*--------------------------------------------- ANIMATIONS ------------------------------------------------------*/
+
+@keyframes card-insertion {
+    0% {
+        opacity: 0;
+        top: -70%;
+        transform: scale(0);
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 1;
+        top: 0%;
+    }
+}
+
+@keyframes card-removal {
+    0% {
+        opacity: 1;
+        top: 0%;
+    }
+    50% {
+        opacity: 0.5;
+        transform: scale(1);
+    }
+    100% {
+        opacity: 0;
+        top: -70%;
+        transform: scale(0);
+    }
+}
