@@ -126,15 +126,13 @@
     grid-area: 14 / 1 / span 3 / span 9;
     display: flex;
     flex-wrap: nowrap;
-    overflow-x: auto;
+    overflow: hidden;
 }
 
 #room .cards-list img {
-    flex: 0 0 auto;
     width: calc(2 * 100% / 9);
     height: 100%;
     position: relative;
-    transition: all 1s;
 }
 
 #room .cards-list img.card {
@@ -227,6 +225,7 @@
     font-size: 1rem;
     border-radius: 1rem;
     width: 80%;
+    padding: 1rem;
     align-self: center;
     opacity: 0;
     animation: fadeIn 1s forwards;
@@ -238,6 +237,8 @@
     flex-flow: column nowrap;
     justify-content: flex-end;
     align-items: flex-start;
+    position: relative;
+    overflow: hidden;
 }
 
 #room .chatbox .messages .message {
@@ -246,15 +247,18 @@
     padding: 1rem;
     background-color: rgb(200, 200, 200);
     border-radius: 1rem;
+    position: relative;
+    bottom: 0px;
+    font-size: 1rem;
+    text-align: left;
+    animation: fadeIn 0.5s;
 }
 
 #room .chatbox .messages .message .sender {
-    font-size: 0.5rem;
     color: red;
 }
 
 #room .chatbox .messages .message .txt {
-    font-size: 0.7rem;
     color: rgb(26, 26, 26);
 }
 

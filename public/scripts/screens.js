@@ -27,7 +27,7 @@ let screens = (() => {
             let HTMLstrStart = ""
                 +"<div class='chatbox show'>"
                     +"<div class='room-code'>Room Code: " + code + "</div>"
-                    +"<div class='messages'></div>"
+                    +"<div class='messages scrollable' data-scroll-dir='y' data-scroll-bound='end'></div>"
                     +"<input class='txtbox' type='text'</input>"
                     +"<button class='send butt' onclick='sendButtClicked()'>Send</button>"
                     +"<button class='quit butt' onclick='quitButtClicked()'>Quit</button>"
@@ -82,7 +82,7 @@ let screens = (() => {
                     <img class='c3' src='res/placeholder.png'>\
                 </div>\
                 <img class='chat butt' src='res/icon-chat.png' onclick='chatButtClicked()'>\
-                <div class='cards-list'>\
+                <div class='cards-list scrollable' data-scroll-dir='x' data-scroll-bound='start'>\
                     <img src='res/placeholder.png' class='card initial-card'>\
                     <img src='res/placeholder.png' class='card initial-card'>\
                     <img src='res/placeholder.png' class='card initial-card'>\
