@@ -74,7 +74,7 @@ let screens = (() => {
 
         emptyRoom: "\
             <div id='room' class='screen'>\
-                <div class='players-list'></div>\
+                <div class='players-list scrollable' data-scroll-dir='x' data-scroll-bound='start'></div>\
                 <img class='draw-pile' src='res/back.png'>\
                 <div class='discard-pile'>\
                     <img class='c1' src='res/placeholder.png'>\

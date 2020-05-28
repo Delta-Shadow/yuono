@@ -28,7 +28,7 @@ io.on('connection', (s) => {
             if (rooms[data.code].isWaitingForPlayers()) {
                 s.join("room_" + data.code);
                 rooms[data.code].addPlayer(data.name, s.id);
-                s.broadcast.emit("playerJoined", data.name);
+                s.in("room_" + data.code).broadcast.emit("playerJoined", data.name);
                 callback(0, rooms[data.code].getSocialSnapshot());
             }
             // Game in Progress, Add Player as Spectator

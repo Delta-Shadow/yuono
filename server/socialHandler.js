@@ -6,7 +6,7 @@ module.exports = (_creatorName, _creatorId) => {;
         {name: creatorName, id: creatorId}
     ];
     let msgs = [
-        // {sender, content}
+        // {sender, txt}
     ];
 
     let addPlayer = (_name, _id) => {
@@ -29,7 +29,7 @@ module.exports = (_creatorName, _creatorId) => {;
             msgs.splice(0, 1);
             changeLog.push( {desc: "removeOldestMsg", unique: false} );
         } 
-        msgs.push({sender: senderName, content: txt});
+        msgs.push({sender: senderName, txt: txt});
         changeLog.push( {desc: "insertMsg", val: txt, sender: senderName, unique: false} );
         return changeLog;
     }

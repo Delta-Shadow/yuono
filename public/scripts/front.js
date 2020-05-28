@@ -12,14 +12,28 @@ GSM.registerMe("frontend", (msg) => {
             alert("The Room Code you provided is incorrect.");
         break;
 
-        case "insertMsg":
-            let ref = roomScreenDOM().getElementsByClassName("messages")[0];
-            ref.insertAdjacentHTML("beforeend", screens.room.message(msg.txt, msg.sender));
-            if (ref.getAttribute("data-scroll-dir") == "x") {
-                ref.lastChild.style.left = ref.firstChild.getAttribute("data-pos") + "px";
+        case "playerJoined": 
+            let playersListRef = roomScreenDOM().getElementsByClassName("players-list")[0];
+            playersListRef.insertAdjacentHTML("beforeend", screens.room.player(msg.playerName));
+            if (playersListRef.getAttribute("data-scroll-dir") == "x") {
+                playersListRef.lastChild.style.left = playersListRef.getAttribute("data-pos") + "px";
             } else {
-                ref.lastChild.style.top = ref.firstChild.getAttribute("data-pos") + "px";
+                playersListRef.lastChild.style.top = playersListRef.getAttribute("data-pos") + "px";
             }
+        break;
+
+        case "insertMsg":
+            let messagesRef = roomScreenDOM().getElementsByClassName("messages")[0];
+            messagesRef.insertAdjacentHTML("beforeend", screens.room.message(msg.txt, msg.sender));
+            if (messagesRef.getAttribute("data-scroll-dir") == "x") {
+                messagesRef.lastChild.style.left = messagesRef.getAttribute("data-pos") + "px";
+            } else {
+                messagesRef.lastChild.style.top = messagesRef.getAttribute("data-pos") + "px";
+            }
+        break;
+
+        case "removeOldestMsg":
+            roomScreenDOM().getElementsByClassName("messages")[0].firstChild.remove();
         break;
     }
 });
@@ -122,9 +136,9 @@ document.body.addEventListener("touchend", () => { scrollDir = "o" }, {passive: 
 function playButtClicked() {
     let ref = menuScreenDOM();
     let str = ref.getElementsByClassName("txtbox")[0].value;
-    //if (str == "") { alert("Please enter your name before playing. It's good manners."); return 0; }
-    //GSM.postMsg("backend", {topic: "setName", val: str});
-    GSM.postMsg("backend", {topic: "setName", val: "DS"});
+    if (str == "") { alert("Please enter your name before playing. It's good manners."); return 0; }
+    GSM.postMsg("backend", {topic: "setName", val: str});
+    //GSM.postMsg("backend", {topic: "setName", val: "DS"});
     switchScreen(ref, screens.form);
 }
 
@@ -148,6 +162,8 @@ function chatButtClicked() {
 
 function sendButtClicked() {
     let txt = roomScreenDOM().getElementsByClassName("txtbox")[0].value;
+    if (txt == "") {return 0;}
+    roomScreenDOM().getElementsByClassName("txtbox")[0].value = "";
     GSM.postMsg("backend", {topic: "sendMsg", val: txt});
 }
 
@@ -162,7 +178,6 @@ function backButtClicked() {
 }
 
 function quitButtClicked() {}
-
 function kickButtClicked() {}
 function startButtClicked() {}
 
@@ -183,11 +198,28 @@ function switchScreen(current, next) {
 function buildRoom(code, data, isCreator) {
     let ref = roomScreenDOM();
 
+    // Draw all Players
     data.players.forEach((player) => {
         let ele = screens.room.player(player);
         ref.getElementsByClassName("players-list")[0].insertAdjacentHTML("beforeend", ele);
     });
+
+    // Draw all messages
     ref.insertAdjacentHTML("beforeend", screens.room.chatbox(code, isCreator));
+    if (isCreator) {
+        setTimeout(() => {
+            ref.getElementsByClassName("messages")[0].insertAdjacentHTML("beforeend", screens.room.message("Hi! This is your game room. You can see this room's code above", "Game Master"));
+            setTimeout(() => {
+                ref.getElementsByClassName("messages")[0].insertAdjacentHTML("beforeend", screens.room.message("Others can join this room using that code. To to start playing, invite atleast one more friend to this room", "Game Master"));
+            }, 700);
+        }, 1000);
+    } else {
+        data.msgs.forEach((msg) => {
+            ref.getElementsByClassName("messages")[0].insertAdjacentHTML("beforeend", screens.room.message(msg.txt, msg.sender));
+        })
+    }
+
+    // Attach Scrolling Events
     let eles = ref.getElementsByClassName("scrollable");
     for (let i = 0; i < eles.length; i++) {
         eles.item(i).addEventListener("mousedown", mouseDown);

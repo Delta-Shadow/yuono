@@ -83,7 +83,7 @@ function startGame() {
 sock.on("playerJoined", (playerName) => {
     //if (mode == "inRoom") {
         socialData.players.push(playerName);
-        console.log(socialData.players);
+        GSM.postMsg("frontend", {topic: "playerJoined", playerName: playerName});
     //}
 });
 
@@ -115,10 +115,12 @@ sock.on("socialReaktionCommon", (d) => {
                 break;
                 
             case "insertMsg":
-                GSM.postMsg("frontend", {topic: "insertMsg", sender: change.sender, txt: change.val});
+                GSM.postMsg("frontend", {topic: change.desc, sender: change.sender, txt: change.val});
                 break;
 
             case "removeOldestMsg":
+                socialData.msgs.splice(0, 1);
+                GSM.postMsg("frontend", {topic: change.desc});
                 break;
         }
     });

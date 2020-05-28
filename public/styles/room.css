@@ -11,11 +11,10 @@
     grid-area: 1 / 1 / span 3 / span 9;
     display: flex;
     flex-wrap: nowrap;
-    overflow: auto hidden;
+    overflow: hidden;
 }
 
 #room .players-list .player {
-    flex: 0 0 auto;
     width: calc(2 * 100% / 9); height: 100%;
     display: grid;
     grid-template: repeat(6, 1fr) / 1fr;
@@ -178,6 +177,8 @@
     height: 50%;
     align-self: center;
     border-radius: 1rem;
+    text-align: left;
+    padding: 0 1rem;
 }
 
 #room .chatbox .butt {
@@ -250,16 +251,18 @@
     position: relative;
     bottom: 0px;
     font-size: 1rem;
-    text-align: left;
-    animation: fadeIn 0.5s;
+    animation: newMsg 1s;
 }
 
 #room .chatbox .messages .message .sender {
     color: red;
+    text-align: left;
+    margin-bottom: 0.5rem;
 }
 
 #room .chatbox .messages .message .txt {
     color: rgb(26, 26, 26);
+    text-align: left;
 }
 
 /*--------------------------------------------- ANIMATIONS ------------------------------------------------------*/
@@ -293,5 +296,16 @@
         opacity: 0;
         top: -70%;
         transform: scale(0);
+    }
+}
+
+@keyframes newMsg {
+    0% {
+        opacity: 0;
+        transform: translateX(-1rem);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(0rem);
     }
 }
